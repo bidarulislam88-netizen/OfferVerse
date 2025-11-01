@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offer Verse</title>
+<title>Offer Verse - McDonald’s $100 Gift Card</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
   body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f5f8fc;
+    background: linear-gradient(135deg, #f0f6ff, #e8f1ff);
     margin: 0;
     padding: 0;
     color: #222;
@@ -19,9 +19,30 @@
     background: #fff;
     margin: 40px auto;
     border-radius: 18px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
     overflow: hidden;
+    position: relative;
   }
+
+  /* Floating sparkle animation */
+  @keyframes sparkle {
+    0% {opacity: 0; transform: translateY(0) scale(0.8);}
+    50% {opacity: 1; transform: translateY(-10px) scale(1);}
+    100% {opacity: 0; transform: translateY(0) scale(0.8);}
+  }
+  .sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #00a2ff;
+    border-radius: 50%;
+    animation: sparkle 3s infinite ease-in-out;
+    opacity: 0.4;
+  }
+  .sparkle:nth-child(1) {top: 15%; left: 10%; animation-delay: 0.5s;}
+  .sparkle:nth-child(2) {top: 25%; right: 15%; animation-delay: 1s;}
+  .sparkle:nth-child(3) {bottom: 15%; left: 20%; animation-delay: 1.5s;}
+  .sparkle:nth-child(4) {bottom: 10%; right: 10%; animation-delay: 2s;}
 
   .banner img {
     width: 100%;
@@ -48,10 +69,36 @@
     color: #444;
   }
 
+  /* Countdown */
+  .countdown {
+    background: #ff3b30;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 18px;
+  }
+
+  /* Email Input */
+  .email-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .email-box input {
+    padding: 12px 14px;
+    border: 1.5px solid #ccc;
+    border-radius: 10px;
+    width: 70%;
+    font-size: 14px;
+    outline: none;
+  }
+
   /* Apply Button */
   .apply-btn {
     background: linear-gradient(135deg, #0066ff, #00a2ff);
-    color: #ffffff; /* টেক্সটের কালার সাদা */
+    color: #ffffff;
     text-decoration: none;
     padding: 14px 28px;
     border-radius: 10px;
@@ -65,7 +112,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .apply-btn::before {
     content: "";
     position: absolute;
@@ -77,60 +123,73 @@
     transform: skewX(-25deg);
     transition: 0.5s;
   }
-
   .apply-btn:hover::before {
     left: 125%;
   }
-
   .apply-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 102, 255, 0.5);
   }
-
   .apply-btn svg {
     margin-left: 8px;
-    fill: #ffffff; /* আইকনের কালারও সাদা */
+    fill: #ffffff;
+  }
+
+  /* Eligibility animation */
+  #loading {
+    display: none;
+    color: #0066ff;
+    font-weight: 500;
+    margin-top: 15px;
   }
 
   .footer {
     background: #f0f0f0;
     text-align: center;
     font-size: 13px;
-    padding: 10px 0;
+    padding: 12px 0;
     color: #555;
   }
 
+  .disclaimer {
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+  }
+
   @media (max-width: 480px) {
-    .content h2 {
-      font-size: 20px;
-    }
-    .apply-btn {
-      font-size: 16px;
-      padding: 12px 22px;
-    }
+    .content h2 {font-size: 20px;}
+    .apply-btn {font-size: 16px; padding: 12px 22px;}
   }
 </style>
 </head>
 <body>
 
 <div class="container">
+  <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
+
   <div class="banner">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgdPGO8INhCQXqRIInZjDFS2NJZsEnG-jtgq-L4o8LGAZRZelFhjNgClq039BGq5386o36vgZCTzjf4YBw8k9FDVcoqmYndwuKiHJta_pLkri9nnhbxJ8m-wxHdQ1Kbp5j9AiY1sGg5L18-xTNGNFc1UwgeAU_8SlboZYUh5_v3tcJcmGWOVnRfnYD1rFNk/s712/27282.jpg" alt="American Airlines Jobs">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgdPGO8INhCQXqRIInZjDFS2NJZsEnG-jtgq-L4o8LGAZRZelFhjNgClq039BGq5386o36vgZCTzjf4YBw8k9FDVcoqmYndwuKiHJta_pLkri9nnhbxJ8m-wxHdQ1Kbp5j9AiY1sGg5L18-xTNGNFc1UwgeAU_8SlboZYUh5_v3tcJcmGWOVnRfnYD1rFNk/s712/27282.jpg" alt="McDonald's Gift Card">
   </div>
 
   <div class="content">
+    <div class="countdown">Offer ends in <span id="timer">05:00</span> minutes!</div>
     <h2>McDonald’s is Giving Away $100 Gift Cards!</h2>
-    <p>Love McDonald’s fries and burgers? 🍟🍔
-Here’s your chance to grab a $100 McDonald’s Gift Card — available for a limited time!
-Simply enter your email below to check if you’re eligible and receive your exclusive reward offer.
-No hidden fees. 100% free to participate.</p>
+    <p>Love McDonald’s fries and burgers? 🍟🍔 Here’s your chance to grab a <b>$100 McDonald’s Gift Card</b> — available for a limited time! Simply enter your email below to check eligibility and claim your reward.</p>
 
-    <a href="https://www.af9m8trk.com/NP911LPH/UPW123XH/" class="apply-btn">
+    <div class="email-box">
+      <input type="email" placeholder="Enter your email..." id="email">
+    </div>
+
+    <a href="#" id="claimBtn" class="apply-btn">
       Claim Your $100 Gift Card 
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
         <path d="M10.804 8L5.5 12.5V3.5L10.804 8z"/>
       </svg>
     </a>
+
+    <div id="loading">✅ Checking eligibility... please wait</div>
+    <div class="disclaimer">*Not affiliated with or endorsed by McDonald's Corporation.</div>
   </div>
 
   <div class="footer">
@@ -138,10 +197,30 @@ No hidden fees. 100% free to participate.</p>
   </div>
 </div>
 
+<script>
+  // Countdown Timer (5 minutes)
+  let time = 300;
+  const timerDisplay = document.getElementById('timer');
+  setInterval(() => {
+    if (time > 0) {
+      time--;
+      const m = Math.floor(time / 60);
+      const s = time % 60;
+      timerDisplay.textContent = `${m}:${s < 10 ? '0' + s : s}`;
+    }
+  }, 1000);
+
+  // Loading animation then redirect
+  const btn = document.getElementById('claimBtn');
+  const loading = document.getElementById('loading');
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    loading.style.display = 'block';
+    setTimeout(() => {
+      window.location.href = "https://www.af9m8trk.com/NP911LPH/UPW123XH/";
+    }, 2500);
+  });
+</script>
+
 </body>
 </html>
-
-
-
-
-
