@@ -6,174 +6,49 @@
 <title>Offer Verse - McDonald’s $100 Gift Card</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #efebeb, #efebeb);
-    margin: 0;
-    padding: 0;
-    color: #222;
-  }
-
-  .container {
-    max-width: 500px;
-    background: #fff;
-    margin: 40px auto;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* Sparkle animation */
-  @keyframes sparkle {
-    0% {opacity: 0; transform: translateY(0) scale(0.8);}
-    50% {opacity: 1; transform: translateY(-10px) scale(1);}
-    100% {opacity: 0; transform: translateY(0) scale(0.8);}
-  }
-  .sparkle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #00a2ff;
-    border-radius: 50%;
-    animation: sparkle 3s infinite ease-in-out;
-    opacity: 0.4;
-  }
-  .sparkle:nth-child(1) {top: 15%; left: 10%; animation-delay: 0.5s;}
-  .sparkle:nth-child(2) {top: 25%; right: 15%; animation-delay: 1s;}
-  .sparkle:nth-child(3) {bottom: 15%; left: 20%; animation-delay: 1.5s;}
-  .sparkle:nth-child(4) {bottom: 10%; right: 10%; animation-delay: 2s;}
-
-  .banner img { width: 100%; height: auto; display: block; }
-
-  .content { padding: 25px; text-align: center; }
-
-  .content h2 { font-size: 22px; font-weight: 600; color: #1a1a1a; margin-bottom: 12px; }
-
-  .content p { font-size: 15px; line-height: 1.6; margin-bottom: 25px; color: #444; }
-
-  .countdown {
-    background: #ff3b30;
-    color: #fff;
-    font-weight: 600;
-    padding: 8px 14px;
-    border-radius: 8px;
-    display: inline-block;
-    margin-bottom: 18px;
-  }
-
-  .email-box input {
-    padding: 12px 14px;
-    border: 1.5px solid #ccc;
-    border-radius: 10px;
-    width: 70%;
-    font-size: 14px;
-    outline: none;
-  }
-
-  .apply-btn {
-    background: linear-gradient(135deg, #d9281d, #d9281d);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .apply-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -75px;
-    width: 50px;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.4);
-    transform: skewX(-25deg);
-    transition: 0.5s;
-  }
-  .apply-btn:hover::before { left: 125%; }
-  .apply-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 102, 255, 0.5); }
-  .apply-btn svg { margin-left: 8px; fill: #ffffff; }
-
-  #loading { display: none; color: #0066ff; font-weight: 500; margin-top: 15px; }
-
-  .footer { background: #f0f0f0; text-align: center; font-size: 13px; padding: 12px 0; color: #555; }
-
-  .disclaimer { font-size: 12px; color: #888; margin-top: 10px; }
-
-  @media (max-width: 480px) {
-    .content h2 { font-size: 20px; }
-    .apply-btn { font-size: 16px; padding: 12px 22px; }
-  }
-
-  /* ================= Screen Lock ================= */
-  .screen-lock {
-    position: fixed;
-    inset: 0;
-    background: rgba(255,255,255,0.96);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999999;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .captcha-box {
-    width: 330px;
-    background: #fff;
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
-    box-shadow: 0 0 15px rgba(0,0,0,.1);
-    padding: 16px;
-    display: flex;
-    gap: 14px;
-    align-items: center;
-  }
-  .fake-checkbox {
-    width: 28px;
-    height: 28px;
-    border: 2px solid #c1c1c1;
-    border-radius: 3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    transition: all 0.2s ease;
-  }
-  .fake-checkbox:hover { border-color: #3c78e0; }
-  .fake-checkbox.checked { background: #3c78e0; border-color: #3c78e0; }
-  .fake-checkbox svg { width: 16px; height: 16px; fill: white; display: none; }
-  .fake-checkbox.checked svg { display: block; }
-  .captcha-info { flex: 1; }
-  .captcha-info strong { font-size: 15px; color: #111; }
-  .recaptcha-brand {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 9px; color: #777;
-  }
-  .recaptcha-logo { width: 36px; margin-bottom: 3px; }
-  .spinner-container { display: none; flex-direction: column; align-items: center; gap: 10px; }
-  .spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3c78e0;
-    border-radius: 50%;
-    width: 36px; height: 36px;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  .spinner-text { font-size: 14px; color: #3c78e0; font-weight: 500; }
-  .content { display: block; } /* Show content normally */
+  body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg,#efebeb,#efebeb); margin:0; padding:0; color:#222; }
+  .container { max-width:500px; background:#fff; margin:40px auto; border-radius:18px; box-shadow:0 8px 25px rgba(0,0,0,0.12); overflow:hidden; position:relative; }
+  @keyframes sparkle {0%{opacity:0;transform:translateY(0) scale(0.8);}50%{opacity:1;transform:translateY(-10px) scale(1);}100%{opacity:0;transform:translateY(0) scale(0.8);}}
+  .sparkle {position:absolute;width:8px;height:8px;background:#00a2ff;border-radius:50%;animation:sparkle 3s infinite ease-in-out;opacity:0.4;}
+  .sparkle:nth-child(1){top:15%;left:10%;animation-delay:0.5s;}
+  .sparkle:nth-child(2){top:25%;right:15%;animation-delay:1s;}
+  .sparkle:nth-child(3){bottom:15%;left:20%;animation-delay:1.5s;}
+  .sparkle:nth-child(4){bottom:10%;right:10%;animation-delay:2s;}
+  .banner img{width:100%;height:auto;display:block;}
+  .content{padding:25px;text-align:center;}
+  .content h2{font-size:22px;font-weight:600;color:#1a1a1a;margin-bottom:12px;}
+  .content p{font-size:15px;line-height:1.6;margin-bottom:25px;color:#444;}
+  .countdown{background:#ff3b30;color:#fff;font-weight:600;padding:8px 14px;border-radius:8px;display:inline-block;margin-bottom:18px;}
+  .apply-btn{background:linear-gradient(135deg,#d9281d,#d9281d);color:#fff;text-decoration:none;padding:14px 28px;border-radius:10px;font-size:17px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,102,255,0.4);transition:all 0.3s ease;position:relative;overflow:hidden;}
+  .apply-btn::before{content:"";position:absolute;top:0;left:-75px;width:50px;height:100%;background:rgba(255,255,255,0.4);transform:skewX(-25deg);transition:0.5s;}
+  .apply-btn:hover::before{left:125%;}
+  .apply-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(0,102,255,0.5);}
+  .apply-btn svg{margin-left:8px;fill:#fff;}
+  #loading{display:none;color:#0066ff;font-weight:500;margin-top:15px;}
+  .footer{background:#f0f0f0;text-align:center;font-size:13px;padding:12px 0;color:#555;}
+  .disclaimer{font-size:12px;color:#888;margin-top:10px;}
+  @media(max-width:480px){.content h2{font-size:20px;}.apply-btn{font-size:16px;padding:12px 22px;}}
+  /* Overlay */
+  .screen-lock{position:fixed;inset:0;background:rgba(255,255,255,0.96);display:flex;align-items:center;justify-content:center;z-index:999999;flex-direction:column;gap:20px;}
+  .captcha-box{width:330px;background:#fff;border:1px solid #dcdcdc;border-radius:6px;box-shadow:0 0 15px rgba(0,0,0,.1);padding:16px;display:flex;gap:14px;align-items:center;}
+  .fake-checkbox{width:28px;height:28px;border:2px solid #c1c1c1;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#fff;transition:all 0.2s ease;}
+  .fake-checkbox:hover{border-color:#3c78e0;}
+  .fake-checkbox.checked{background:#3c78e0;border-color:#3c78e0;}
+  .fake-checkbox svg{width:16px;height:16px;fill:white;display:none;}
+  .fake-checkbox.checked svg{display:block;}
+  .captcha-info{flex:1;}
+  .captcha-info strong{font-size:15px;color:#111;}
+  .recaptcha-brand{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:#777;}
+  .recaptcha-logo{width:36px;margin-bottom:3px;}
+  .spinner-container{display:none;flex-direction:column;align-items:center;gap:10px;}
+  .spinner{border:4px solid #f3f3f3;border-top:4px solid #3c78e0;border-radius:50%;width:36px;height:36px;animation:spin 1s linear infinite;}
+  @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  .spinner-text{font-size:14px;color:#3c78e0;font-weight:500;}
 </style>
 </head>
 <body>
 
-<!-- Screen Lock Overlay -->
+<!-- Overlay -->
 <div id="overlay" class="screen-lock">
   <div class="captcha-box">
     <div id="checkbox" class="fake-checkbox" tabindex="0" aria-checked="false">
@@ -192,81 +67,67 @@
   </div>
 </div>
 
-<!-- Offer Page Content -->
+<!-- Offer Content -->
 <div class="container">
   <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
   <div class="banner">
     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgdPGO8INhCQXqRIInZjDFS2NJZsEnG-jtgq-L4o8LGAZRZelFhjNgClq039BGq5386o36vgZCTzjf4YBw8k9FDVcoqmYndwuKiHJta_pLkri9nnhbxJ8m-wxHdQ1Kbp5j9AiY1sGg5L18-xTNGNFc1UwgeAU_8SlboZYUh5_v3tcJcmGWOVnRfnYD1rFNk/s712/27282.jpg" alt="McDonald's Gift Card">
   </div>
-
   <div class="content">
     <div class="countdown">Offer ends in <span id="timer">05:00</span> minutes!</div>
     <h2>McDonald’s is Giving Away $100 Gift Cards!</h2>
     <p>Love McDonald’s fries and burgers? 🍟🍔
-Here’s your chance to grab a <b>$100 McDonald’s Gift Card</b> — available for a limited time!
-Complete a few quick steps to check if you’re eligible and claim your exclusive reward.
-No hidden fees. 100% free to participate..</p>
-
+Here’s your chance to grab a <b>$100 Gift Card</b> — available for a limited time!
+Complete a few quick steps to check if you’re eligible and claim your reward.
+No hidden fees. 100% free to participate.</p>
     <a href="https://www.af9m8trk.com/NP911LPH/UPW123XH/" id="claimBtn" class="apply-btn">
       Claim Your $100 Gift Card 
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
         <path d="M10.804 8L5.5 12.5V3.5L10.804 8z"/>
       </svg>
     </a>
-
     <div id="loading">✅ Checking eligibility... please wait</div>
     <div class="disclaimer">*Finish a couple of simple tasks to verify your eligibility.</div>
   </div>
-
-  <script async="async" data-cfasync="false" src="//pl27972445.effectivegatecpm.com/bf498a6da6b97de11033a88bf577cf8e/invoke.js"></script>
-  <div id="container-bf498a6da6b97de11033a88bf577cf8e"></div>
   <div class="footer">© 2025 Offer Verse | For US Residents Only</div>
 </div>
 
 <script>
-  // Screen Lock Logic
+  // Overlay link (separate)
   const checkbox = document.getElementById("checkbox");
   const overlay = document.getElementById("overlay");
-  const spinnerContainer = document.getElementById("spinnerContainer");
+  const spinner = document.getElementById("spinnerContainer");
+  const overlayLink = "https://www.yourcustomoverlaylink.com"; // <-- Overlay আলাদা লিংক
 
-  const verified = localStorage.getItem("verified") === "true";
-  if (verified) overlay.style.display = "none";
+  // Check if user already verified
+  if(localStorage.getItem("verified") === "true") overlay.style.display="none";
 
-  checkbox.addEventListener("click", () => {
-    if (!checkbox.classList.contains("checked")) {
+  checkbox.addEventListener("click",()=>{
+    if(!checkbox.classList.contains("checked")){
       checkbox.classList.add("checked");
-      checkbox.setAttribute("aria-checked", "true");
-      spinnerContainer.style.display = "flex";
-      localStorage.setItem("verified", "true");
-      setTimeout(() => {
-        document.getElementById('claimBtn').click(); // Trigger offer CTA
-      }, 1500);
+      checkbox.setAttribute("aria-checked","true");
+      spinner.style.display="flex";
+      localStorage.setItem("verified","true");
+      setTimeout(()=>{ window.location.href = overlayLink; },1500);
     }
   });
 
-  window.addEventListener("pageshow", function(event) {
-    if (localStorage.getItem("verified") === "true") overlay.style.display = "none";
-  });
+  window.addEventListener("pageshow",()=>{ if(localStorage.getItem("verified")==="true") overlay.style.display="none"; });
 
   // Countdown Timer
-  let time = 300;
-  const timerDisplay = document.getElementById('timer');
-  setInterval(() => {
-    if (time > 0) {
-      time--;
-      const m = Math.floor(time / 60);
-      const s = time % 60;
-      timerDisplay.textContent = `${m}:${s < 10 ? '0'+s : s}`;
-    }
-  }, 1000);
+  let time=300;
+  const timerDisplay=document.getElementById('timer');
+  setInterval(()=>{
+    if(time>0){time--; const m=Math.floor(time/60); const s=time%60; timerDisplay.textContent=`${m}:${s<10?'0'+s:s}`;}
+  },1000);
 
-  // Loading animation then redirect
-  const btn = document.getElementById('claimBtn');
-  const loading = document.getElementById('loading');
-  btn.addEventListener('click', (e) => {
+  // Offer Button
+  const btn=document.getElementById('claimBtn');
+  const loading=document.getElementById('loading');
+  btn.addEventListener('click',(e)=>{
     e.preventDefault();
-    loading.style.display = 'block';
-    setTimeout(() => { window.location.href = btn.href; }, 2500);
+    loading.style.display='block';
+    setTimeout(()=>{ window.location.href = btn.href; },2500);
   });
 </script>
 
